@@ -1,9 +1,5 @@
-import React from 'react';
-
-const Firebase = () => (
-    <div>
-        <h2>Firebase</h2>
-    </div>
-);
+import FirebaseContext, { withFirebase } from './context';
+import Firebase from './firebase'
 
 export default Firebase;
+export { FirebaseContext, withFirebase }
