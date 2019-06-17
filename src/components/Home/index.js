@@ -11,22 +11,25 @@ class HomeComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.props.firebase.thoughts().once('value', snapshot => {
-                //Why aren't we getting into this code??
+        console.log('firebase props', this.props.firebase)
+        window.thingo = this.props.firebase;
+        this.props.firebase.thoughts().on('value', snapshot => {
             const thoughts = snapshot.val();
-            const thoughtsList = Object.keys(thoughts);
+            const thoughtsList = Object.keys(thoughts).map(key => thoughts[key])
         
             this.setState({
-                thought: thoughtsList
+                thoughts: thoughtsList
             })
-        });
+        }, console.log);
        
     }
 
     render() {
         return (
-            <div>I am connecting to Firebase, maybe!
-                {console.log(this.state.thoughts)}
+            <div>The Goddesses' Thoughts: 
+                <ul>
+                   {this.state.thoughts.map(thought =><li key={thought}>{thought}</li>)} 
+                </ul>
             </div>
         )
     }
