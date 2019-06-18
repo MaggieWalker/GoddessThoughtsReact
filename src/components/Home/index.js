@@ -11,17 +11,19 @@ class HomeComponent extends React.Component {
     }
 
     componentDidMount() {
-        console.log('firebase props', this.props.firebase)
-        window.thingo = this.props.firebase;
         this.props.firebase.thoughts().on('value', snapshot => {
             const thoughts = snapshot.val();
             const thoughtsList = Object.keys(thoughts).map(key => thoughts[key])
-        
+        console.log('this', this)
             this.setState({
                 thoughts: thoughtsList
             })
         }, console.log);
        
+    }
+
+    componentWillUnmount() {
+        this.props.firebase.thoughts().off();
     }
 
     render() {
