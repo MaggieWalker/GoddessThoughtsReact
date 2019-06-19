@@ -1,8 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../../constants/routes'
 
 const Landing = () => (
     <div>
-        <h1>Goddess Thoughts</h1>
+        <h1><Link to={ROUTES.HOME}>Goddess Thoughts</Link></h1>
     </div>
 );
 

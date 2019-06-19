@@ -1,12 +1,17 @@
 import React from 'react';
-import { SignUpForm } from '../SignUp';
+import { SignUpForm, SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
-
 
 const SignInComponent = () => (
     <div>
-        <h2>Sign In</h2>
-        <SignUpForm />
+        <div>
+            <h2>Sign In</h2>
+            <SignUpForm loginType={'sign-in'}/>
+        </div>
+        <br/>
+        <div>
+            <SignUpLink />
+        </div>
     </div>
 );
 

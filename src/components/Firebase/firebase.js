@@ -26,6 +26,7 @@ class Firebase{
     //Auth methods
     createUser = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
     signInUser = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+
     signOutUser = () => this.auth.signOut();
     passwordReset = (email) => this.auth.sendPasswordResetEmail(email);
     passwordUpdate = (password) => this.auth.currentUser.updatePassword(password);

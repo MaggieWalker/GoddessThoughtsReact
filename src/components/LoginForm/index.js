@@ -8,6 +8,8 @@ class LoginForm extends React.Component {
             email: '',
             password: ''
         }
+
+        this.loginType = this.props.loginType
     }
 
     onTest =(e)=> {
@@ -26,6 +28,18 @@ class LoginForm extends React.Component {
         event.preventDefault()
         event.target['email'].value = '';
         event.target['password'].value = '';
+        console.log('login type', this.loginType);
+        this.loginType === 'sign-up' 
+        ? 
+        this.props.firebase.createUser(this.state.email, this.state.password)
+        .catch(function(err) {
+            alert(err.message)
+        }) 
+        : 
+        this.props.firebase.signInUser(this.state.email, this.state.password)
+        .catch(function(err) {
+            alert(err.message)
+        })
     }
 
     render() {
