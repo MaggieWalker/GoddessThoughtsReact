@@ -55,11 +55,16 @@ class LoginForm extends React.Component {
         //For sign-ins
         this.props.firebase.signInUser(this.state.email, this.state.password)
         .catch(function(err) {
-            if (err){
-                alert(err.message)
-            }
-            else {
-                console.log('are we here')
+           this.setState({
+               err: err
+           })
+           alert(err.message)
+        }).then(() => {
+            if (this.state.err !== null) {
+                this.setState({
+                    err: null
+                })
+            } else {
                 this.props.history.push(ROUTES.HOME)
             }
         })
