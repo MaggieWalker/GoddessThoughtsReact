@@ -23,6 +23,10 @@ class Firebase{
     thoughts = () => this.db.ref('thoughts');
     users = () => this.db.ref('users');
 
+    //Writing to database
+    writeThought = (thought) => this.db.ref('thoughts').push(thought);
+    writeUser = (user) => this.db.ref('users').push(user);
+
     //Auth methods
     createUser = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
     signInUser = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
