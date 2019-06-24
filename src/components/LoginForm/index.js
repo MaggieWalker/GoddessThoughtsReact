@@ -1,6 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import { withFirebase } from '../Firebase'
+import { compose } from 'redux';
+
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -8,16 +11,10 @@ class LoginForm extends React.Component {
 
         this.state = {
             email: '',
-            password: '',
-            err: null
+            password: ''
         }
 
         this.loginType = this.props.loginType
-    }
-
-    onTest =(e)=> {
-        console.log('event', e, 'event name', e.target.name)
-        console.log({[e.target.name]: e.target.value})
     }
 
     onChange =(e)=> {
@@ -35,45 +32,31 @@ class LoginForm extends React.Component {
         ? 
         //For sign-ups
         this.props.firebase.createUser(this.state.email, this.state.password)
+        .then(() => {
+            this.props.firebase.writeUser(this.state.email);
+            this.props.history.push(ROUTES.HOME) 
+            alert(`Welcome ${this.state.email}!`)
+
+        })
         .catch((err) => {
-            this.setState({
-                err: err
-            })
+            console.log('err', err)
             alert(err.message)
-        }).then(() => {
-            if (this.state.err !== null) {
-                this.setState({
-                    err: null
-                })
-            } else {
-                this.props.firebase.writeUser(this.state.email);
-                this.props.history.push(ROUTES.HOME) 
-                alert(`Welcome ${this.state.email}!`)
-            }
         })
         : 
         //For sign-ins
         this.props.firebase.signInUser(this.state.email, this.state.password)
-        .catch(function(err) {
-           this.setState({
-               err: err
-           })
+        .then(() => {
+            this.props.history.push(ROUTES.HOME)
+        })
+        .catch((err) => {
            alert(err.message)
-        }).then(() => {
-            if (this.state.err !== null) {
-                this.setState({
-                    err: null
-                })
-            } else {
-                this.props.history.push(ROUTES.HOME)
-            }
         })
     }
 
     render() {
         const isInvalid = 
+        //continue adding validation
         this.state.password.length < 6 ||
-        this.state.password === '' || 
         this.state.email === '';
         return(
             <div>
@@ -87,4 +70,4 @@ class LoginForm extends React.Component {
     }
 }
 
-export default withRouter(LoginForm);
+export default compose(withRouter, withFirebase)(LoginForm);

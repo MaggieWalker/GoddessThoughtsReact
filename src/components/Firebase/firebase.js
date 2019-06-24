@@ -16,8 +16,10 @@ class Firebase{
     constructor() {
         app.initializeApp(config);
         this.db = app.database();
-
         this.auth = app.auth();
+
+    //Clarify what this provider method returns
+        this.googleProvider = new app.auth.GoogleAuthProvider()
     }
     //Connecting to different parts of the database
     thoughts = () => this.db.ref('thoughts');
@@ -30,6 +32,7 @@ class Firebase{
     //Auth methods
     createUser = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
     signInUser = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+    signInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
 
     signOutUser = () => this.auth.signOut();
     passwordReset = (email) => this.auth.sendPasswordResetEmail(email);

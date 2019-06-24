@@ -1,20 +1,17 @@
 import React from 'react';
-import { SignUpForm, SignUpLink } from '../SignUp';
-import { withFirebase } from '../Firebase';
+import { SignUpLink } from '../SignUp';
+import SignInGoogle from '../SignIn/google'
+import LoginForm from '../LoginForm';
 
-const SignInComponent = () => (
+const SignIn = () => (
     <div>
-        <div>
-            <h2>Sign In</h2>
-            <SignUpForm loginType={'sign-in'}/>
-        </div>
+        <h2>Sign In</h2>
+        <LoginForm loginType={'sign-in'}/>
         <br/>
-        <div>
-            <SignUpLink />
-        </div>
+        <SignInGoogle />
+        <br/>
+        <SignUpLink />
     </div>
 );
-
-const SignIn = withFirebase(SignInComponent)
 
 export default SignIn;

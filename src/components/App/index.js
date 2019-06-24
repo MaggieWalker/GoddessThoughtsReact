@@ -8,7 +8,6 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
-import AccountPage from '../Account';
 import AdminPage from '../Admin';
 
 const App = () => (
@@ -24,7 +23,6 @@ const App = () => (
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-            <Route path={ROUTES.ACCOUNT} component={AccountPage} />
             <Route path={ROUTES.ADMIN} component={AdminPage} />
         </div>
     </Router> 
