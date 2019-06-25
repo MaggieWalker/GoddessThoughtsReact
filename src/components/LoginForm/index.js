@@ -33,7 +33,12 @@ class LoginForm extends React.Component {
         //For sign-ups
         this.props.firebase.createUser(this.state.email, this.state.password)
         .then(() => {
-            this.props.firebase.writeUser(this.state.email);
+            const user = {
+                userId: null,
+                name: this.state.email,
+                email: this.state.email
+            }
+            this.props.firebase.writeUser(user);
             this.props.history.push(ROUTES.HOME) 
             alert(`Welcome ${this.state.email}!`)
 
